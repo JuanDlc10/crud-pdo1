@@ -1,3 +1,4 @@
+
 <script>
     const eliminar = (id) => {
         Swal.fire({
@@ -10,12 +11,12 @@
             confirmButtonText: 'Eliminado!'
             }).then((result) => {
             if (result.isConfirmed) {
-                $.ajax(
+                $.ajax({
                     url: "./app/model/process/delete.process.php",
                     data: {
                         id
                     },
-                    type_ "POST",
+                    type: "POST",
                     success: () => {
                         Swal.fire({
                             title: 'Contacto eliminado',
@@ -40,7 +41,7 @@
                             confirmButtonText: 'ok'
                             })
                     }
-                )
+                })
             }
             })
     }

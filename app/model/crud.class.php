@@ -29,6 +29,14 @@
         unset($this->conexion);
         return json_encode($stmt);
     }
+    public function createRol($datos){
+        $query = "insert into rol(rol) values (:rol)";
+        $stmt= $this->conexion->prepare($query);
+        $stmt->bindParam(":rol",$datos["rol"]);
+        $stmt->execute();
+        unset($this->conexion);
+        return json_encode($stmt);
+    }
     public function update($datos){
         $query = "update contactos set nombre=:nombre, telefono=:telefono, email=:email where id=:id";
         $stmt= $this->conexion->prepare($query); //Asi se usa la conexion

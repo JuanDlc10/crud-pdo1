@@ -25,9 +25,8 @@
                     $contacto = $crud->show($_GET["id"]);
                     include "./app/views/update.php";
                     break;
-                case 'delete':
-                    $contacto = $crud->show($_GET["id"]);
-                    include "./app/views/delete.php";
+                case 'createRol':
+                    include "./app/views/createRol.php";
                     break;
                 default:
                     header("location: ./read");
