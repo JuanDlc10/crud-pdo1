@@ -25,7 +25,7 @@
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Ok!'
                         }).then((result) => {
-                            window.location = "./read"
+                            window.location.reload();
                         })  
             },
             error:() => {

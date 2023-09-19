@@ -25,7 +25,12 @@
                     $contacto = $crud->show($_GET["id"]);
                     include "./app/views/update.php";
                     break;
+                case 'updateRol':
+                    $contacto = $crud->showRol($_GET["id"]);
+                    include "./app/views/updateRol.php";
+                    break;
                 case 'createRol':
+                    $roles = $crud->readRol();
                     include "./app/views/createRol.php";
                     break;
                 default:

@@ -19,12 +19,21 @@
         unset($this->conexion);
         return $result;
     }
+    public function readRol(){
+        $query = "Select * FROM rol";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchALL(PDO::FETCH_ASSOC);
+        unset($this->conexion);
+        return $result;
+    }
     public function create($datos){
-        $query = "insert into contactos(nombre, telefono, email) values (:nombre,:telefono,:email)";
+        $query = "insert into contactos(nombre, telefono, email) values (:nombre,:telefono,:email, :rol)";
         $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
         $stmt->bindParam(":nombre",$datos["nombre"]);
         $stmt->bindParam(":telefono",$datos["telefono"]);
         $stmt->bindParam(":email",$datos["email"]);
+        $stmt->bindParam(":rol",$datos["rol"]);
         $stmt->execute();
         unset($this->conexion);
         return json_encode($stmt);
@@ -38,12 +47,22 @@
         return json_encode($stmt);
     }
     public function update($datos){
-        $query = "update contactos set nombre=:nombre, telefono=:telefono, email=:email where id=:id";
+        $query = "update contactos set nombre=:nombre, telefono=:telefono, email=:email, rol=:rol where id=:id";
         $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
         $stmt->bindParam(":id",$datos["id"]);
         $stmt->bindParam(":nombre",$datos["nombre"]);
         $stmt->bindParam(":telefono",$datos["telefono"]);
         $stmt->bindParam(":email",$datos["email"]);
+        $stmt->bindParam(":rol",$datos["rol"]);
+        $stmt->execute();
+        unset($this->conexion);
+        return $stmt;
+    }
+    public function updateRol($datos){
+        $query = "update rol set nombre=:nombre where id=:id";
+        $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
+        $stmt->bindParam(":id",$datos["id"]);
+        $stmt->bindParam(":rol",$datos["rol"]);
         $stmt->execute();
         unset($this->conexion);
         return $stmt;
@@ -56,8 +75,25 @@
         unset($this->conexion);
         return $stmt;
     }
+    public function deleteRol($id){
+        $query = "delete from rol where id=:id";
+        $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        unset($this->conexion);
+        return $stmt;
+    }
     public function show($id){
         $query = "select * from contactos where id=:id";
+        $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        unset($this->conexion);
+        return $result;
+    }
+    public function showRol($id){
+        $query = "select * from rol where id=:id";
         $stmt= $this->conexion->prepare($query); //Asi se usa la conexion
         $stmt->bindParam(":id",$id);
         $stmt->execute();
